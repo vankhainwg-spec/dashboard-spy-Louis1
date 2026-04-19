@@ -68,11 +68,25 @@ async function runScrape(cycleLabel) {
   hasError = null
 
   try {
-    const tab = await chrome.tabs.create({ url: DASHBOARD_URL, active: false })
+    // Remember current active tab để restore focus sau
+    const [prevActive] = await chrome.tabs.query({ active: true, lastFocusedWindow: true })
+
+    // Mở tab ACTIVE trước — visibilityState='visible' khi page load
+    // Tránh signal document.hidden suốt thời gian parse
+    const tab = await chrome.tabs.create({ url: DASHBOARD_URL, active: true })
     activeTabId = tab.id
 
-    // Wait for content script to load
-    await new Promise(r => setTimeout(r, 5000))
+    // Wait 2-3s cho page load với visibility=visible (analytics tracker ghi nhận như user tab)
+    await new Promise(r => setTimeout(r, 2000 + Math.random() * 1500))
+
+    // Restore focus về tab cũ — tab spy chạy ngầm từ đây
+    // User chỉ thấy tab flash qua 2-3s, không bị disrupt workflow
+    if (prevActive && prevActive.id !== tab.id) {
+      try { await chrome.tabs.update(prevActive.id, { active: true }) } catch {}
+    }
+
+    // Wait thêm cho content script settle
+    await new Promise(r => setTimeout(r, 2500))
 
     // Send message to trigger scrape
     chrome.tabs.sendMessage(tab.id, { type: 'SCRAPE_DASHBOARD' }, (response) => {

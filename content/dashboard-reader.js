@@ -51,10 +51,10 @@ async function humanClick(el) {
     r()
   }, delay))
 
-  // Scroll element vào view nếu cần (giống user scroll để thấy trước khi click)
+  // Scroll element vào view nếu cần (smooth = giống user scroll thật, không instant-jump)
   if (rect.top < 0 || rect.bottom > window.innerHeight) {
-    el.scrollIntoView({ behavior: 'instant', block: 'center' })
-    await new Promise(r => setTimeout(r, 200 + Math.random() * 150))
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    await new Promise(r => setTimeout(r, 400 + Math.random() * 300))
   }
 
   // Hover sequence
