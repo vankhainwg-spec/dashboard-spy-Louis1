@@ -1,0 +1,6 @@
+export const STORE_ID = 'Louis1'
+export const SUPABASE_URL = 'https://egettwigxbrdugqlfahq.supabase.co'
+export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnZXR0d2lneGJyZHVncWxmYWhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwNTk5MjEsImV4cCI6MjA4OTYzNTkyMX0.LEBb4gBht_Bwb_WcMOGQais5kDEncAMyOz89Cr62W2c'
+export const LARK_WORKER_URL = 'https://lark-notify-worker.vankhai-nwg.workers.dev'
+export const NOTIFY_SECRET = 'e041bb77435ce73dadc463246e7d27b8bf9948b35ac938a5f720d84acbb0e6e9'
+export const DASHBOARD_URL = 'https://www.etsy.com/your/shops/me/dashboard'

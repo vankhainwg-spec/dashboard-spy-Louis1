@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Dashboard Spy Louis1",
+  "version": "1.0.0",
+  "description": "Scrape Etsy Shop Manager Dashboard stats for Louis1 (NatureInbound) — fallback when no API access",
+  "permissions": ["storage", "alarms", "tabs", "scripting", "notifications"],
+  "host_permissions": [
+    "https://www.etsy.com/*",
+    "https://egettwigxbrdugqlfahq.supabase.co/*",
+    "https://lark-notify-worker.vankhai-nwg.workers.dev/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [{
+    "matches": ["https://www.etsy.com/your/shops/me/dashboard*"],
+    "js": ["content/dashboard-reader.js"],
+    "run_at": "document_idle"
+  }],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Dashboard Spy Louis1"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
